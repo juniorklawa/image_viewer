@@ -1,0 +1,26 @@
+<body style="margin: 0; padding: 0; background-color: black;">
+  <img
+    id="dynamicImage"
+    alt="Dynamic Image"
+    style="
+      display: block;
+      width: 100%;
+      height: auto;
+      max-height: 100vh;
+      object-fit: contain;
+    "
+  />
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      setInterval(() => {
+        fetch("/image-url")
+          .then((response) => response.json())
+          .then((data) => {
+            var img = document.getElementById("dynamicImage");
+            img.src = data.imgUrl;
+          })
+          .catch((error) => console.error("Error loading the image:", error));
+      }, 3000); // Fetches every 3000 milliseconds (3 seconds)
+    });
+  </script>
+</body>
